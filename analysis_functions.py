@@ -6,11 +6,11 @@ import seaborn as sns
 
 
 # Read the datasets: 
-agents = pd.read_csv('data/export_per_agent.csv')
-areas = pd.read_csv('data/export_per_area.csv')
-cross = pd.read_csv('data/export_per_area_agent.csv')
+#agents = pd.read_csv('data/export_per_agent.csv')
+#areas = pd.read_csv('data/export_per_area.csv')
+#cross = pd.read_csv('data/export_per_area_agent.csv')
 # Read the geography dataset, that contains all level-4 areas for root_id=1 and 3:
-geography_df = pd.read_csv('data/geography.csv')
+#geography_df = pd.read_csv('data/geography.csv')
 
 
 def prepare_datasets(membership_slots):
