@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def prepare_datasets(membership_slots, agents, areas, cross, geography):
+def prepare_datasets(membership_slots, agents, areas, cross):
     '''
     Prepare all the datasets that we will need. 
     '''
