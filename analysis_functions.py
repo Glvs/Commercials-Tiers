@@ -5,23 +5,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# Read the datasets: 
-#agents = pd.read_csv('data/export_per_agent.csv')
-#areas = pd.read_csv('data/export_per_area.csv')
-#cross = pd.read_csv('data/export_per_area_agent.csv')
-# Read the geography dataset, that contains all level-4 areas for root_id=1 and 3:
-#geography_df = pd.read_csv('data/geography.csv')
-
-
-def prepare_datasets(membership_slots):
+def prepare_datasets(membership_slots, agents, areas, cross, geography):
     '''
     Prepare all the datasets that we will need. 
     '''
-
-    global agents
-    global areas 
-    global cross
-    global geography_df
 
     brand_slots, brandPlus_slots, expert_slots = membership_slots
     
@@ -39,10 +26,10 @@ def prepare_datasets(membership_slots):
     # Add membership_slots on cross_df:
     cross_df = cross_df.merge(agents_df.loc[:, ['agent_id', 'membership_slots']], on='agent_id')
     
-    return(agents_df, areas_df, cross_df, geography_df)
+    return(agents_df, areas_df, cross_df)
 
 
-def get_lvl4_thresholds(df, n_specialists=2):
+def get_lvl4_thresholds(df, geography_df, n_specialists=2):
     '''
     For each level-4 area find the threshold such that there will be n_specialists
     in each area, and adds the column 'lvl4_threshold'.
@@ -234,7 +221,7 @@ def get_eligibles_per_area_df(df):
 
 
 
-def get_specialists_per_area_df(df):
+def get_specialists_per_area_df(df, areas, geography_df):
     '''
     Returns a dataframe with the number of eligible agents and specialists on each level-4 area.
         * As an extra information the number of agents previously active on the area, as well 
@@ -246,7 +233,6 @@ def get_specialists_per_area_df(df):
     It includes all the level-4 geographies, including those that we had no data on the cross dataset.
     '''
      
-    global areas
     areas_df = areas.loc[:, ['lvl4_id', 'lvl4_name', 'agents', 'entrustments']].copy()
 
     # Take the (agents,areas) couples for which an agent is eligible in this area:
